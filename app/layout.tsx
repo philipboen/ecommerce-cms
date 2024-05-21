@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ModalProvider } from "@/providers/modal-provider";
+import { ToastProvider } from "@/providers/toast-provider";
 
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree" });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${figtree.variable} max-container font-sans`}>
+          <ToastProvider />
           <ModalProvider />
           {children}
         </body>
