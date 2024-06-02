@@ -8,7 +8,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useStoreModal } from "@/hooks/use-store-modal";
-import { Modal } from "@/components/modal";
+import { Modal } from "@/components/shared/modal";
 import {
   Form,
   FormControl,

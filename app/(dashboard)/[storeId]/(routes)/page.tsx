@@ -9,10 +9,6 @@ const DashboardPage = async ({ params }: DashboardPageProps) => {
     where: {
       id: params.storeId,
     },
-    cacheStrategy: {
-      ttl: 60,
-      swr: 60,
-    },
   });
 
   return (

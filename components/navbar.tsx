@@ -16,6 +16,9 @@ export const Navbar = async () => {
     where: {
       userId,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   return (
