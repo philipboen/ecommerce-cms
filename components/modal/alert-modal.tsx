@@ -5,6 +5,7 @@ import { Modal } from "@/components/shared/modal";
 import { Button } from "@/components/ui/button";
 
 interface AlertModalProps {
+  type: string;
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
@@ -12,6 +13,7 @@ interface AlertModalProps {
 }
 
 export const AlertModal: React.FC<AlertModalProps> = ({
+  type,
   isOpen,
   onClose,
   onConfirm,
@@ -37,7 +39,7 @@ export const AlertModal: React.FC<AlertModalProps> = ({
           Cancel
         </Button>
         <Button disabled={loading} variant="destructive" onClick={onConfirm}>
-          Delete store
+          Delete {type}
         </Button>
       </div>
     </Modal>

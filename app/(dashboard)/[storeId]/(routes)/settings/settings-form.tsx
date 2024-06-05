@@ -69,7 +69,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
       toast.success("Store deleted.");
     } catch (error) {
       toast.error(
-        "Make sure you have removed all products and categories first."
+        "Make sure you've removed all products and categories associated with this store."
       );
     } finally {
       setLoading(false);
@@ -80,6 +80,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
   return (
     <>
       <AlertModal
+        type="store"
         isOpen={open}
         onClose={() => setOpen(false)}
         onConfirm={onDelete}
