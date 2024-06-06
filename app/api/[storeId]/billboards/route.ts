@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import { db } from "@/lib/db";
 
-export async function PATCH(
+export async function POST(
     req: Request,
     { params }: { params: { storeId: string } }
 ) {
@@ -10,64 +10,70 @@ export async function PATCH(
         const { userId } = auth()
         const body = await req.json();
 
-        const { name } = body;
+        const { label, imageUrl } = body;
 
         if (!userId) {
             return new NextResponse("Unauthenticated", { status: 401 });
         }
 
-        if (!name) {
-            return new NextResponse("Name is required", { status: 400 });
+        if (!label) {
+            return new NextResponse("Label is required", { status: 400 });
+        }
+
+        if (!imageUrl) {
+            return new NextResponse("Image Url is required", { status: 400 });
         }
 
         if (!params.storeId) {
             return new NextResponse("Store ID is required", { status: 400 });
         }
 
-        const store = await db.store.updateMany({
+        const storeByUserId = await db.store.findFirst({
             where: {
                 id: params.storeId,
                 userId,
             },
+        });
+
+        if (!storeByUserId) {
+            return new NextResponse("Unauthorized", { status: 403 });
+        }
+
+        const billboard = await db.billboard.create({
             data: {
-                name,
+                label,
+                imageUrl,
+                storeId: params.storeId,
             },
         });
 
-        return NextResponse.json(store);
+        return NextResponse.json(billboard);
     }
     catch (error) {
-        console.log("[STORE_PATCH]", error);
+        console.log("[BILLBOARDS_POST]", error);
         return new NextResponse("Internal server error", { status: 500 });
     }
 }
 
-export async function DELETE(
+export async function GET(
     req: Request,
     { params }: { params: { storeId: string } }
 ) {
     try {
-        const { userId } = auth()
-
-        if (!userId) {
-            return new NextResponse("Unauthenticated", { status: 401 });
-        }
-
         if (!params.storeId) {
             return new NextResponse("Store ID is required", { status: 400 });
         }
 
-        const store = await db.store.deleteMany({
+        const billboards = await db.billboard.findMany({
             where: {
-                id: params.storeId,
-                userId,
+                storeId: params.storeId,
             },
         });
 
-        return NextResponse.json(store);
+        return NextResponse.json(billboards);
     }
     catch (error) {
-        console.log("[STORE_DELETE]", error);
+        console.log("[BILLBOARDS_GET]", error);
         return new NextResponse("Internal server error", { status: 500 });
     }
 }

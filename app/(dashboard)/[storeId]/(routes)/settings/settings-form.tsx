@@ -90,11 +90,11 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
         <Heading title="Settings" description="Manage store preferences" />
         <Button
           variant="destructive"
-          size="icon"
           disabled={loading}
           onClick={() => setOpen(true)}
         >
-          <Trash className="size-4" />
+          <Trash className="mr-2 size-4" />
+          Delete Store
         </Button>
       </div>
       <Separator />
