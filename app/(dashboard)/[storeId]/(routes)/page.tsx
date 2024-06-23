@@ -12,7 +12,7 @@ const DashboardPage = async ({ params }: DashboardPageProps) => {
   });
 
   return (
-    <div>
+    <div className="space-y-2 p-4">
       <p>Store ID: {store?.id}</p>
       <p>Store Name: {store?.name}</p>
       <p>This is the DashboardPage</p>
