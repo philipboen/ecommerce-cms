@@ -157,7 +157,6 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Billboard</FormLabel>
-
                   <Select
                     disabled={loading}
                     onValueChange={field.onChange}
