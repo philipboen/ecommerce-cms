@@ -4,6 +4,7 @@ import { SignedIn, UserButton } from "@clerk/nextjs";
 import { MainNav } from "@/components/main-nav";
 import StoreSwitcher from "@/components/store-switcher";
 import { db } from "@/lib/db";
+import { ThemeToggle } from "./theme-toggle";
 
 export const Navbar = async () => {
   const { userId } = auth();
@@ -28,6 +29,7 @@ export const Navbar = async () => {
         <MainNav className="mx-6" />
 
         <div className="ml-auto flex items-center space-x-4">
+          <ThemeToggle />
           <SignedIn>
             <UserButton />
           </SignedIn>
